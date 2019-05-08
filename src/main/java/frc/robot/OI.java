@@ -31,9 +31,13 @@ public class OI {
   }
 
   public double GetRightY(){
-    return -gamepad.getRawAxis(2);
+    return -gamepad.getRawAxis(5);
   }
-  
+
+  public double GetLeftX(){
+    return gamepad.getRawAxis(0);
+  }
+
   public double GetRightX(){
     return gamepad.getRawAxis(4);
   }
