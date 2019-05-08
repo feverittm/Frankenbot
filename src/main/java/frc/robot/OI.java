@@ -30,6 +30,10 @@ public class OI {
     return -gamepad.getRawAxis(1);
   }
 
+  public double GetRightY(){
+    return -gamepad.getRawAxis(2);
+  }
+  
   public double GetRightX(){
     return gamepad.getRawAxis(4);
   }
