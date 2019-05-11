@@ -24,8 +24,12 @@ public class RobotMap {
   frontLeftVictor = 2,
   frontRightVictor = 3,
   backLeftVictor = 4,
-  backRightVictor = 5;
-
+  backRightVictor = 5,
+  armTalon = 6,
+  buttonA = 1,
+  buttonB = 2,
+  buttonX = 3,            
+  buttonY = 4;
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;

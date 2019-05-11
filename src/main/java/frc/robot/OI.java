@@ -8,12 +8,15 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+  private JoystickButton armDown, armUp;
   private Joystick gamepad;
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
@@ -23,6 +26,10 @@ public class OI {
   // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
   public OI(){
+  armDown = new JoystickButton(gamepad, RobotMap.buttonA);
+  //buttonB = new JoystickButton(gamepad, 2);
+  //buttonX = new JoystickButton(gamepad, 3);
+  armUp = new JoystickButton(gamepad, RobotMap.buttonY);
     gamepad = new Joystick(0);
   }
 
@@ -52,7 +59,7 @@ public class OI {
   // Start the command when the button is pressed and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenPressed(new ExampleCommand());
-
+  
   // Run the command while the button is being held down and interrupt it once
   // the button is released.
   // button.whileHeld(new ExampleCommand());
