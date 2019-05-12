@@ -25,7 +25,8 @@ public class MoveArm extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double speed;
+    Robot.m_oi.armUp.whileHeld(new Robot.arm.ArmSpeed(.3));
+    Robot.m_oi.armDown.whileHeld(new Robot.arm.ArmSpeed(-.3));
   }
 
   // Make this return true when this Command no longer needs to run execute()
