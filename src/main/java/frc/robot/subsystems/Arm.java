@@ -16,9 +16,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.commands.MoveArm;
-import frc.robot.commands.MoveArmDown;
 import frc.robot.commands.MoveArmUp;
+import frc.robot.commands.MoveArmDown;
 
 /**
  * Add your docs here.
@@ -71,6 +70,5 @@ public class Arm extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
-		setDefaultCommand(new MoveArm());
 	}
 }

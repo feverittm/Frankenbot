@@ -10,8 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class MoveArm extends Command {
-  public MoveArm() {
+public class MoveArmDown extends Command {
+  public MoveArmDown() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.arm);
@@ -25,8 +25,7 @@ public class MoveArm extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_oi.armUp.whileHeld(new Robot.arm.ArmSpeed(.3));
-    Robot.m_oi.armDown.whileHeld(new Robot.arm.ArmSpeed(-.3));
+    Robot.arm.ArmSpeed(-.3);
   }
 
   // Make this return true when this Command no longer needs to run execute()

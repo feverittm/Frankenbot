@@ -10,6 +10,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.commands.MoveArmDown;
+import frc.robot.commands.MoveArmUp;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -26,13 +29,15 @@ public class OI {
   // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
   public OI(){
+  gamepad = new Joystick(0);
   armDown = new JoystickButton(gamepad, RobotMap.buttonA);
   //buttonB = new JoystickButton(gamepad, 2);
   //buttonX = new JoystickButton(gamepad, 3);
   armUp = new JoystickButton(gamepad, RobotMap.buttonY);
-    gamepad = new Joystick(0);
+  
+  armUp.whileHeld(new MoveArmUp());
+  armDown.whileHeld(new MoveArmDown());
   }
-
   public double GetLeftY(){
     return -gamepad.getRawAxis(1);
   }
