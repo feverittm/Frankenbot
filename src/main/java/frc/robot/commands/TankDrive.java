@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class TankDrive extends Command {
+  double left, right;
   public TankDrive() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -25,7 +26,6 @@ public class TankDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double left, right;
     left = Robot.m_oi.GetLeftY();
     right = Robot.m_oi.GetRightY();
     Robot.driveTrain.SetSpeed(left, right);

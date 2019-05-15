@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -26,7 +27,8 @@ public class DriveTrain extends Subsystem {
   // here. Call these from Commands.
   private WPI_TalonSRX leftTalon, rightTalon;
   private WPI_VictorSPX frontLeftVictor, frontRightVictor, backLeftVictor, backRightVictor;
-
+  private AHRS gyro;
+  
   public DriveTrain(){
     leftTalon = new WPI_TalonSRX(RobotMap.leftTalon);
     rightTalon = new WPI_TalonSRX(RobotMap.rightTalon);
@@ -34,6 +36,8 @@ public class DriveTrain extends Subsystem {
     frontRightVictor = new WPI_VictorSPX(RobotMap.frontRightVictor);
     backLeftVictor = new WPI_VictorSPX(RobotMap.backLeftVictor);
     backRightVictor = new WPI_VictorSPX(RobotMap.backRightVictor);
+
+	gyro = new AHRS(RobotMap.gyro);
 
     frontLeftVictor.follow(leftTalon);
     backLeftVictor.follow(leftTalon);
@@ -102,10 +106,31 @@ public class DriveTrain extends Subsystem {
   }
 
   public void SetSpeed(double leftSpeed, double rightSpeed){
+	double modifier = .5;
+    leftTalon.set(ControlMode.PercentOutput, leftSpeed * modifier);
+    rightTalon.set(ControlMode.PercentOutput, rightSpeed * modifier);
+  }
+
+  public void SetUnmodifiedSpeed(double leftSpeed, double rightSpeed){
     leftTalon.set(ControlMode.PercentOutput, leftSpeed);
     rightTalon.set(ControlMode.PercentOutput, rightSpeed);
   }
 
+  public double GetAngle(){
+	return gyro.getAngle();
+  }
+
+  public int GetLeftEncoder(){
+	  return leftTalon.getSelectedSensorPosition();
+  }
+
+  public int GetRightEncoder(){
+	  return rightTalon.getSelectedSensorPosition();
+  }
+
+  public double GetGyro() {
+	  return gyro.getAngle();
+  }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

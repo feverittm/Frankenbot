@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ArcadeDrive extends Command {
+  double left, right;
   public ArcadeDrive() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -25,7 +26,6 @@ public class ArcadeDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double left, right;
     left = Robot.m_oi.GetLeftY() + Robot.m_oi.GetRightX();
     right = Robot.m_oi.GetLeftY() - Robot.m_oi.GetRightX();
     Robot.driveTrain.SetSpeed(left, right);
