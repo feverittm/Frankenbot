@@ -25,8 +25,8 @@ import frc.robot.commands.MoveArmDown;
 public class Arm extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private WPI_TalonSRX armTalon;
-
+	private WPI_TalonSRX armTalon;
+	
   public Arm(){
     armTalon = new WPI_TalonSRX(RobotMap.armTalon);
 
@@ -55,11 +55,11 @@ public class Arm extends Subsystem {
 		armTalon.config_kF(0, 0.1097, 10);
 		armTalon.config_kP(0, 0.113333, 10);
 		armTalon.config_kI(0, 0, 10);
-		armTalon.config_kD(0, 0, 10);	
+		armTalon.config_kD(0, 0, 10);
   }
 
   public void SetPosition(){
-    armTalon.set(ControlMode.Position, 0);
+		armTalon.set(ControlMode.Position, 0);
   }
 
   public void ArmSpeed(double armSpeed){
