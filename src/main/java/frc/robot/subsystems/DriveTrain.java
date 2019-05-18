@@ -37,7 +37,7 @@ public class DriveTrain extends Subsystem {
     backLeftVictor = new WPI_VictorSPX(RobotMap.backLeftVictor);
     backRightVictor = new WPI_VictorSPX(RobotMap.backRightVictor);
 
-	gyro = new AHRS(RobotMap.gyro);
+	//gyro = new AHRS(RobotMap.gyro);
 
     frontLeftVictor.follow(leftTalon);
     backLeftVictor.follow(leftTalon);
@@ -106,7 +106,7 @@ public class DriveTrain extends Subsystem {
   }
 
   public void SetSpeed(double leftSpeed, double rightSpeed){
-	double modifier = .5;
+	double modifier = 1.0; // .5
     leftTalon.set(ControlMode.PercentOutput, leftSpeed * modifier);
     rightTalon.set(ControlMode.PercentOutput, rightSpeed * modifier);
   }
@@ -116,9 +116,9 @@ public class DriveTrain extends Subsystem {
     rightTalon.set(ControlMode.PercentOutput, rightSpeed);
   }
 
-  public double GetAngle(){
+  /*public double GetAngle(){
 	return gyro.getAngle();
-  }
+  }*/
 
   public int GetLeftEncoder(){
 	  return leftTalon.getSelectedSensorPosition();
@@ -128,9 +128,9 @@ public class DriveTrain extends Subsystem {
 	  return rightTalon.getSelectedSensorPosition();
   }
 
-  public double GetGyro() {
+  /*public double GetGyro() {
 	  return gyro.getAngle();
-  }
+  }*/
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

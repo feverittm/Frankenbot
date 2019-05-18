@@ -39,7 +39,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    arm = new Arm();
+    //arm = new Arm();
     driveTrain = new DriveTrain();
     m_oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
