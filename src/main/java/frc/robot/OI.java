@@ -11,15 +11,17 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.commands.LockTarget;
 import frc.robot.commands.MoveArmDown;
 import frc.robot.commands.MoveArmUp;
+import frc.robot.commands.ToggleLight;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  //public JoystickButton armDown, armUp;
+  public JoystickButton lock, toggleLight;
   private Joystick gamepad;
 
   public OI() {
@@ -31,6 +33,12 @@ public class OI {
 
     //armUp.whileHeld(new MoveArmUp());
     //armDown.whileHeld(new MoveArmDown());
+
+    lock = new JoystickButton(gamepad, 1);
+    lock.whileHeld(new LockTarget());
+
+    toggleLight = new JoystickButton(gamepad, 2);
+    toggleLight.whenPressed(new ToggleLight());
   }
 
   public double GetLeftY() {

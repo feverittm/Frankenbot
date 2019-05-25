@@ -18,6 +18,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.TankDrive;
 
 /**
  * Add your docs here.
@@ -135,6 +136,7 @@ public class DriveTrain extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new ArcadeDrive());
+	//setDefaultCommand(new TankDrive());
+	setDefaultCommand(new ArcadeDrive());
   }
 }
