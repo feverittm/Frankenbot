@@ -22,12 +22,12 @@ public class RobotMap {
   // public static int leftMotor = 1;
   // public static int rightMotor = 2;
 
-  public static int leftTalon = 0,
-  rightTalon = 1,
-  frontLeftVictor = 2,
-  frontRightVictor = 3,
-  backLeftVictor = 4,
-  backRightVictor = 5,
+  public static int leftTalon = 7,
+  rightTalon = 2,
+  frontLeftVictor = 6,
+  frontRightVictor = 2,
+  backLeftVictor = 5,
+  backRightVictor = 3,
   armTalon = 6,
   buttonA = 1,
   buttonB = 2,
