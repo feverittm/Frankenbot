@@ -106,7 +106,7 @@ public class DriveTrain extends Subsystem {
   }
 
   public void SetSpeed(double leftSpeed, double rightSpeed){
-	double modifier = .5;
+	double modifier = .25;
     leftTalon.set(ControlMode.PercentOutput, leftSpeed * modifier);
     rightTalon.set(ControlMode.PercentOutput, rightSpeed * modifier);
   }
