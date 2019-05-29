@@ -28,7 +28,7 @@ public class RobotMap {
   frontRightVictor = 2,
   backLeftVictor = 5,
   backRightVictor = 3,
-  armTalon = 6,
+  armTalon = 42069, //TODO: get actual port
   buttonA = 1,
   buttonB = 2,
   buttonX = 3,            
