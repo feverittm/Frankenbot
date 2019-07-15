@@ -30,7 +30,6 @@ import com.kauailabs.navx.frc.AHRS;
 public class DriveTrain extends Subsystem {
 
   public boolean decell = true;
-
   public double maxSpeed = 0.5;
 
   // Decell Data
@@ -57,9 +56,7 @@ public class DriveTrain extends Subsystem {
         NetworkTableInstance.getDefault().getTable("SmartDashboard"));
 
     drive = new DifferentialDrive(leftTalon, rightTalon);
-    
   }
-
 
   /**
    * Drivetrain constructor to use for testing purposes.
@@ -77,7 +74,7 @@ public class DriveTrain extends Subsystem {
     rightTalon = rightBox.talon;
     leftVictor1 = leftBox.victor1;
     rightVictor1 = rightBox.victor1;
- 
+
     drive = new DifferentialDrive(leftTalon, rightTalon);
 
     initAHRS();
@@ -101,26 +98,22 @@ public class DriveTrain extends Subsystem {
   }
 
   /**
-   * Stop the robot!  Simple command.
+   * Stop the robot! Simple command.
    */
   public void stop() {
     // Set Motor Volts to 0
-    leftTalon.set(ControlMode.PercentOutput, 0);
-    rightTalon.set(ControlMode.PercentOutput, 0);
+    drive.tankDrive(0, 0);
   }
 
   /**
-   * Set a percent output power for the left and right sides
-   * of the drivetrain
+   * Set a percent output power for the left and right sides of the drivetrain
    * 
    * @param left  Percentage input for the left talon.
    * @param right Percentage input for the right talon.
    */
   public void setPower(double left, double right) {
-    leftTalon.set(ControlMode.PercentOutput, left);
-    rightTalon.set(ControlMode.PercentOutput, right);
+    drive.tankDrive(left, right, false);
   }
-
 
   public void setRampArcadePower(double front, double turn) {
     double newY = front;
@@ -139,8 +132,9 @@ public class DriveTrain extends Subsystem {
       newY = (Math.abs(newY) / newY) * maxSpeed;
     }
 
-    leftTalon.set(ControlMode.PercentOutput, newY + turn);
-    rightTalon.set(ControlMode.PercentOutput, newY - turn);
+    // leftTalon.set(ControlMode.PercentOutput, newY + turn);
+    // rightTalon.set(ControlMode.PercentOutput, newY - turn);
+    drive.arcadeDrive(newY, turn, false);
 
     prevY = newY;
   }
@@ -226,13 +220,13 @@ public class DriveTrain extends Subsystem {
   }
 
   public double getHeading() {
-		if (gyro != null) {
-			return( gyro.getYaw() );
-		} else {
-			return 0.0;
-		}
-	}
-	  
+    if (gyro != null) {
+      return (gyro.getYaw());
+    } else {
+      return 0.0;
+    }
+  }
+
   /**
    * Gets PID constants from the SmartDashboard and then uses setPIDValues(double,
    * double, double)
@@ -253,7 +247,8 @@ public class DriveTrain extends Subsystem {
    * @param d derivative PID constant
    */
   public void setPIDValues(double p, double i, double d) {
-    // Calling the correct config_kx for each parameter might make this work better...;-)
+    // Calling the correct config_kx for each parameter might make this work
+    // better...;-)
     leftTalon.config_kP(0, p, 0);
     rightTalon.config_kP(0, p, 0);
     leftTalon.config_kI(0, i, 0);
