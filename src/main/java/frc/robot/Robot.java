@@ -26,7 +26,11 @@ import frc.robot.subsystems.DriveTrain;
 public class Robot extends TimedRobot {
   public static OI m_oi;
   public static DriveTrain driveTrain;
-  //public static Arm arm;
+  public static Arm arm;
+
+  private double lastTime = 0; // millis seconds
+  public static double deltaTime = 0; // seconds
+  private int loopCount = 0, executeLoopCount = 30;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -55,6 +59,16 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    if (loopCount > executeLoopCount) {
+      updateSmartDashboard();
+      loopCount = 0;
+    } else {
+      loopCount++;
+    }
+
+    deltaTime = (System.currentTimeMillis() - lastTime) / 1000;
+    lastTime = System.currentTimeMillis();
+
   }
 
   /**
@@ -131,5 +145,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+  }
+
+  /**
+   * Update the smartdashboard cells.
+   */
+  public void updateSmartDashboard() {
+    ;
   }
 }

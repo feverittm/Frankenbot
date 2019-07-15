@@ -28,7 +28,7 @@ public class ArcadeDrive extends Command {
   protected void execute() {
     left = Robot.m_oi.GetLeftY() + Robot.m_oi.GetRightX();
     right = Robot.m_oi.GetLeftY() - Robot.m_oi.GetRightX();
-    Robot.driveTrain.SetSpeed(left, right);
+    Robot.driveTrain.setPower(left, right);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -40,7 +40,7 @@ public class ArcadeDrive extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveTrain.SetSpeed(0, 0);
+    Robot.driveTrain.setPower(0, 0);
   }
 
   // Called when another command which requires one or more of the same

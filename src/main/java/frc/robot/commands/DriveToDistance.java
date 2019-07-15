@@ -27,11 +27,11 @@ public class DriveToDistance extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    postion = Robot.driveTrain.GetLeftEncoder();
+    postion = Robot.driveTrain.leftEncoderTicks();
     error = whereGo - postion;
     left = speedModifier * error;
     right = speedModifier * error;
-    Robot.driveTrain.SetUnmodifiedSpeed(left, right);
+    Robot.driveTrain.setPower(left, right);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -47,7 +47,7 @@ public class DriveToDistance extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveTrain.SetSpeed(0, 0);
+    Robot.driveTrain.setPower(0, 0);
   }
 
   // Called when another command which requires one or more of the same

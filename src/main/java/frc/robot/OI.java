@@ -8,9 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.commands.MoveArmDown;
 import frc.robot.commands.MoveArmUp;
 
@@ -30,10 +28,10 @@ public class OI {
   // Button button = new JoystickButton(stick, buttonNumber);
   public OI(){
   gamepad = new Joystick(0);
-  armDown = new JoystickButton(gamepad, RobotMap.buttonA);
+  armDown = new JoystickButton(gamepad, RobotMap.Buttons.buttonA);
   //buttonB = new JoystickButton(gamepad, 2);
   //buttonX = new JoystickButton(gamepad, 3);
-  armUp = new JoystickButton(gamepad, RobotMap.buttonY);
+  armUp = new JoystickButton(gamepad, RobotMap.Buttons.buttonB);
   
   armUp.whileHeld(new MoveArmUp());
   armDown.whileHeld(new MoveArmDown());
