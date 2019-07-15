@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.ArcadeDrive;
@@ -40,6 +41,7 @@ public class DriveTrain extends Subsystem {
   // GearBox class stores information for the motor controllers for one gearbox
   private final WPI_TalonSRX leftTalon, rightTalon;
   private final WPI_VictorSPX leftVictor1, rightVictor1;
+  private DifferentialDrive drive;
   private AHRS gyro;
 
   private NetworkTable table;
@@ -53,6 +55,9 @@ public class DriveTrain extends Subsystem {
     this(RoboMisc.standTalonSRXSetup(RobotMap.Ports.leftTalon, RobotMap.Ports.leftVictor1, false),
         RoboMisc.standTalonSRXSetup(RobotMap.Ports.rightTalon, RobotMap.Ports.rightVictor1, true), null,
         NetworkTableInstance.getDefault().getTable("SmartDashboard"));
+
+    drive = new DifferentialDrive(leftTalon, rightTalon);
+    
   }
 
 
@@ -73,6 +78,8 @@ public class DriveTrain extends Subsystem {
     leftVictor1 = leftBox.victor1;
     rightVictor1 = rightBox.victor1;
  
+    drive = new DifferentialDrive(leftTalon, rightTalon);
+
     initAHRS();
     resetEncoders();
     setCoast();
