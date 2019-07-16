@@ -8,12 +8,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
 public class MoveArmUp extends Command {
   public MoveArmUp() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    //requires(Robot.arm);
+    requires(Robot.arm);
   }
 
   // Called just before this Command runs the first time
@@ -24,7 +25,7 @@ public class MoveArmUp extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //Robot.arm.ArmSpeed(.3);
+    Robot.arm.ArmSpeed(.3);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -36,7 +37,7 @@ public class MoveArmUp extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    //Robot.arm.ArmSpeed(0);
+    Robot.arm.ArmSpeed(0);
   }
 
   // Called when another command which requires one or more of the same

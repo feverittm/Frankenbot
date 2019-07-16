@@ -7,44 +7,39 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class TurnToAngle extends PIDCommand {
   double whereGo, left, right, postion, error, speedModifier;
-  PIDController turnController;
 
-  static final double kP = 0.03;
-  static final double kI = 0.00;
-  static final double kD = 0.00;
-  static final double kF = 0.00;
-
-  static final double kToleranceDegrees = 2.0f;    
+  static final double kToleranceDegrees = 2.0f;
   static final double kTargetAngleDegrees = 90.0f;
-  
+
   public TurnToAngle(double whereGo) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    super(kP, kI, kD);
+    super(RobotMap.Values.driveAngleP, RobotMap.Values.driveAngleI,
+    RobotMap.Values.driveAngleD);
     requires(Robot.driveTrain);
     this.getPIDController().setAbsoluteTolerance(kToleranceDegrees);
     this.getPIDController().setSetpoint(whereGo);
   }
 
-	@Override
-	protected double returnPIDInput() {
-		return Robot.driveTrain.getAngle();
-	}
+  @Override
+  protected double returnPIDInput() {
+    return Robot.driveTrain.getAngle();
+  }
 
-	@Override
-	protected void usePIDOutput(double speed) {
-		// these may need to be flipped so that left is reversed.
-		Robot.driveTrain.setPower(speed, -speed);
-	}
+  @Override
+  protected void usePIDOutput(double speed) {
+    // these may need to be flipped so that left is reversed.
+    Robot.driveTrain.setPower(speed, -speed);
+  }
 
-	@Override
-	protected boolean isFinished() {
-		return getPIDController().onTarget();
-	}
+  @Override
+  protected boolean isFinished() {
+    return getPIDController().onTarget();
+  }
 }

@@ -56,7 +56,11 @@ public class Arm extends Subsystem {
 
   public void SetPosition(){
 		armTalon.set(ControlMode.Position, 0);
-  }
+	}
+	
+	public double getPosition() {
+		return armTalon.getSelectedSensorPosition();
+	}
 
   public void ArmSpeed(double armSpeed){
     armTalon.set(ControlMode.PercentOutput, armSpeed);
