@@ -7,53 +7,44 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.command.PIDCommand;
 import frc.robot.Robot;
 
-public class TurnToAngle extends Command {
+public class TurnToAngle extends PIDCommand {
   double whereGo, left, right, postion, error, speedModifier;
+  PIDController turnController;
+
+  static final double kP = 0.03;
+  static final double kI = 0.00;
+  static final double kD = 0.00;
+  static final double kF = 0.00;
+
+  static final double kToleranceDegrees = 2.0f;    
+  static final double kTargetAngleDegrees = 90.0f;
+  
   public TurnToAngle(double whereGo) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    super(kP, kI, kD);
     requires(Robot.driveTrain);
+    this.getPIDController().setAbsoluteTolerance(kToleranceDegrees);
+    this.getPIDController().setSetpoint(whereGo);
   }
 
-  // Called just before this Command runs the first time
-  @Override
-  protected void initialize() {
-    speedModifier = .05;
-  }
+	@Override
+	protected double returnPIDInput() {
+		return Robot.driveTrain.getAngle();
+	}
 
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
-    postion = Robot.driveTrain.getAngle();
-    error = whereGo - postion;
-    left = speedModifier * error;
-    right = -speedModifier * error;
-    Robot.driveTrain.setPower(left, right);
-  }
+	@Override
+	protected void usePIDOutput(double speed) {
+		// these may need to be flipped so that left is reversed.
+		Robot.driveTrain.setPower(speed, -speed);
+	}
 
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    if (Math.abs(error) <= 10){
-      return true;
-    } else {
-    return false;
-    }
-  }
-
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-    Robot.driveTrain.setPower(0, 0);
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-    end();
-  }
+	@Override
+	protected boolean isFinished() {
+		return getPIDController().onTarget();
+	}
 }

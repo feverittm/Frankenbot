@@ -150,6 +150,9 @@ public class DriveTrain extends Subsystem {
     rightTalon.set(ControlMode.Position, right);
   }
 
+  /**
+   * Reset the gyro
+   */
   public void resetGyro() {
     if (gyro != null) {
       gyro.reset();
@@ -159,11 +162,27 @@ public class DriveTrain extends Subsystem {
     }
   }
 
+  /**
+   * Get the current angle of the robot
+   * @return Angle in degrees between 0 and 359
+   */
   public double getAngle() {
     if (gyro != null) {
       return gyro.getAngle() % 360;
       // return (gyro.getAngle()-Math.floor(gyro.getAngle()/360)*360);
       // Not TESTED
+    } else {
+      return 0;
+    }
+  }
+
+/**
+   * Get the current angle of the robot limited to -90 to +90
+   * @return Yaw Angle in degrees 
+   */
+  public double getYaw() {
+    if (gyro != null) {
+      return gyro.getYaw();
     } else {
       return 0;
     }
